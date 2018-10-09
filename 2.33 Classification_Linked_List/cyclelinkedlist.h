@@ -7,11 +7,11 @@ struct CycleNode
 	T data;
 	CycleNode *prenode;
 	CycleNode *nextnode;
-	CycleNode(const T &d) :data(d), prenode(NULL), nextnode(NULL);
+	CycleNode(const T &d) :data(d), prenode(NULL), nextnode(NULL) {}
 };
 
 template <class T>
- 
+
 class Cycle_Linked_List {
 public:
 	Cycle_Linked_List();
@@ -24,10 +24,10 @@ public:
 	void CycleListDelete(int location);
 	void CycleListDelete(int location, T &elem);
 private:
-	CycleNode *head;
-	CycleNode *find(int location) {
+	CycleNode<T> *head;
+	CycleNode<T> *find(int location) {
 		CycleNode *p = head;
-		for (int  i = 0; i < location-1; i++)
+		for (int i = 0; i < location - 1; i++)
 		{
 			p = p->nextnode;
 		}
@@ -56,8 +56,7 @@ inline Cycle_Linked_List<T>::~Cycle_Linked_List()
 template<class T>
 inline void Cycle_Linked_List<T>::InitCycleList(T headelem)
 {
-	head = new CycleNode;
-	head->data = headelem;
+	head = new CycleNode<T>(headelem);
 	head->prenode = head;
 	head->nextnode = head;
 }
@@ -65,7 +64,7 @@ inline void Cycle_Linked_List<T>::InitCycleList(T headelem)
 template<class T>
 inline bool Cycle_Linked_List<T>::isEmpty()
 {
-	if (head->nextnode==head)
+	if (head->nextnode == head)
 	{
 		return true;
 	}
@@ -73,15 +72,15 @@ inline bool Cycle_Linked_List<T>::isEmpty()
 	{
 		return false;
 	}
-	
+
 }
 
 template<class T>
 inline int Cycle_Linked_List<T>::CycleListLength()
 {
 	int length = 0;
-	CycleNode *p = head;
-	while (p->nextnode!=head)
+	CycleNode<T> *p = head;
+	while (p->nextnode != head)
 	{
 		length++;
 		p = p->nextnode;
@@ -92,12 +91,12 @@ inline int Cycle_Linked_List<T>::CycleListLength()
 template<class T>
 inline void Cycle_Linked_List<T>::CycleListInsert(int location, T elem)
 {
-	if (location<1||location>CycleListLength())
+	if (location<1 || location>CycleListLength())
 	{
 		exit;
 	}
-	CycleNode *insertnode =new CycleNode(elem);
-	CycleNode *temp = head;
+	CycleNode<T> *insertnode = new CycleNode<T>(elem);
+	CycleNode<T> *temp = head;
 	for (int i = 0; i < location; i++)
 	{
 		temp = temp->nextnode;
@@ -105,19 +104,19 @@ inline void Cycle_Linked_List<T>::CycleListInsert(int location, T elem)
 	insertnode->nextnode = temp->nextnode;
 	insertnode->nextnode->prenode = insertnode;
 	insertnode->prenode = temp;
-	temp->next = insertnode;
+	temp->nextnode = insertnode;
 }
 
 template<class T>
 inline void Cycle_Linked_List<T>::CycleListDelete(int location)
 {
-	if (location<1||location>CycleListLength())
+	if (location<1 || location>CycleListLength())
 	{
 		exit;
 	}
-	if (location==1)
+	if (location == 1)
 	{
-		CycleNode *temp = head;
+		CycleNode<T> *temp = head;
 		head = head->nextnode;
 		delete temp;
 		exit;
@@ -140,13 +139,13 @@ inline void Cycle_Linked_List<T>::CycleListDelete(int location, T & elem)
 	}
 	if (location == 1)
 	{
-		CycleNode *temp = head;
+		CycleNode<T> *temp = head;
 		head = head->nextnode;
 		delete temp;
 		exit;
 	}
-	CycleNode *predeletnode = find(location);
-	CycleNode *temp = predeletnode->nextnode;
+	CycleNode<T> *predeletnode = find(location);
+	CycleNode<T> *temp = predeletnode->nextnode;
 	elem = temp->data;
 	predeletnode->nextnode = temp->nextnode;
 	temp->nextnode->prenode = predeletnode;
