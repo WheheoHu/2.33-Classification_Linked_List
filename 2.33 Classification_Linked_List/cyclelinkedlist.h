@@ -25,6 +25,14 @@ public:
 	void CycleListDelete(int location, T &elem);
 private:
 	CycleNode *head;
+	CycleNode *find(int location) {
+		CycleNode *p = head;
+		for (int  i = 0; i < location-1; i++)
+		{
+			p = p->nextnode;
+		}
+		return p;
+	}
 };
 
 template<class T>
@@ -98,4 +106,49 @@ inline void Cycle_Linked_List<T>::CycleListInsert(int location, T elem)
 	insertnode->nextnode->prenode = insertnode;
 	insertnode->prenode = temp;
 	temp->next = insertnode;
+}
+
+template<class T>
+inline void Cycle_Linked_List<T>::CycleListDelete(int location)
+{
+	if (location<1||location>CycleListLength())
+	{
+		exit;
+	}
+	if (location==1)
+	{
+		CycleNode *temp = head;
+		head = head->nextnode;
+		delete temp;
+		exit;
+	}
+	CycleNode *predeletnode = find(location);
+	CycleNode *temp = predeletnode->nextnode;
+	predeletnode->nextnode = temp->nextnode;
+	temp->nextnode->prenode = predeletnode;
+	delete temp;
+
+
+}
+
+template<class T>
+inline void Cycle_Linked_List<T>::CycleListDelete(int location, T & elem)
+{
+	if (location<1 || location>CycleListLength())
+	{
+		exit;
+	}
+	if (location == 1)
+	{
+		CycleNode *temp = head;
+		head = head->nextnode;
+		delete temp;
+		exit;
+	}
+	CycleNode *predeletnode = find(location);
+	CycleNode *temp = predeletnode->nextnode;
+	elem = temp->data;
+	predeletnode->nextnode = temp->nextnode;
+	temp->nextnode->prenode = predeletnode;
+	delete temp;
 }
