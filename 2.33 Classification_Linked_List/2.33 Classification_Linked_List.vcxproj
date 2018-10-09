@@ -118,6 +118,7 @@
     <ClCompile Include="MainBin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cyclelinkedlist.h" />
     <ClInclude Include="linearlinkedlist.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
