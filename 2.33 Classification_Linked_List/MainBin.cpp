@@ -7,7 +7,7 @@
 #include "cyclelinkedlist.h"
 #include <iostream>
 
-void Classification(Linear_Linked_List<char>LLList, Cycle_Linked_List<char> &CLList_letter, Cycle_Linked_List<char> &CLList_Number, Cycle_Linked_List<char> & CLList_Others);
+void Classification(Linear_Linked_List<char>&LLList, Cycle_Linked_List<char> &CLList_letter, Cycle_Linked_List<char> &CLList_Number, Cycle_Linked_List<char> & CLList_Others);
 
 int main() {
 	//≥ı ºªØ¡¥±Ì
@@ -23,12 +23,10 @@ int main() {
 	Cycle_Linked_List<char> CLList_Others;
 
 	Classification(LLList, CLList_letter, CLList_Number, CLList_Others);
-
-
 	system("pause");
 }
 
-void Classification(Linear_Linked_List<char> LLList, Cycle_Linked_List<char>& CLList_letter, Cycle_Linked_List<char>& CLList_Number, Cycle_Linked_List<char>& CLList_Others)
+void Classification(Linear_Linked_List<char> &LLList, Cycle_Linked_List<char>& CLList_letter, Cycle_Linked_List<char>& CLList_Number, Cycle_Linked_List<char>& CLList_Others)
 {
 	bool isFirst_Num = true;
 	bool isFirst_Letter = true;
