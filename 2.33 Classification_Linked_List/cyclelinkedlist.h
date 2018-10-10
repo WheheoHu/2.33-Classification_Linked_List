@@ -50,7 +50,8 @@ inline Cycle_Linked_List<T>::Cycle_Linked_List(T firstelem)
 template<class T>
 inline Cycle_Linked_List<T>::~Cycle_Linked_List()
 {
-	delete head;
+	free(head);
+	head = NULL;
 }
 
 template<class T>
